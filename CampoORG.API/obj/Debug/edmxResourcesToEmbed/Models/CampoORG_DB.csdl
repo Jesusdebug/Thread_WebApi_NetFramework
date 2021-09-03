@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CampoOrgModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ContadorConsulta">
+    <Key>
+      <PropertyRef Name="IdContadorConsultas" />
+    </Key>
+    <Property Name="IdContadorConsultas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Conteo" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContadorRole">
+    <Key>
+      <PropertyRef Name="IdContadorRoles" />
+    </Key>
+    <Property Name="IdContadorRoles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Conteo" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Geolocalizacion">
+    <Key>
+      <PropertyRef Name="IdGeolocalizacion" />
+    </Key>
+    <Property Name="IdGeolocalizacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dispositivo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DicrecionIP" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Hora" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="IdRoles" />
+    </Key>
+    <Property Name="IdRoles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Rol" FromRole="Rol" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdRoles" Type="Int32" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_Usuarios_Rol" FromRole="Usuarios" ToRole="Rol" />
+  </EntityType>
+  <Association Name="FK_Usuarios_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="IdRoles" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdRoles" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CampoOrgConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ContadorConsultas" EntityType="Self.ContadorConsulta" />
+    <EntitySet Name="ContadorRoles" EntityType="Self.ContadorRole" />
+    <EntitySet Name="Geolocalizacions" EntityType="Self.Geolocalizacion" />
+    <EntitySet Name="Rols" EntityType="Self.Rol" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Usuarios_Rol" Association="Self.FK_Usuarios_Rol">
+      <End Role="Rol" EntitySet="Rols" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

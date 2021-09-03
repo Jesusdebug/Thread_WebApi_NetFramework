@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="26f07eab5f4240b2afe25b6a125da3fd" Name="Diagram1">
+        <EntityTypeShape EntityType="CampoOrgModel.ContadorConsulta" Width="1.5" PointX="0.625" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CampoOrgModel.ContadorRole" Width="1.5" PointX="2.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CampoOrgModel.Geolocalizacion" Width="1.5" PointX="5.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CampoOrgModel.Rol" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CampoOrgModel.Usuario" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="CampoOrgModel.FK_Usuarios_Rol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

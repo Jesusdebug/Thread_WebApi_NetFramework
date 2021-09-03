@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CampoOrgModelStoreContainer" CdmEntityContainer="CampoOrgConnection">
+    <EntitySetMapping Name="ContadorConsultas">
+      <EntityTypeMapping TypeName="CampoOrgModel.ContadorConsulta">
+        <MappingFragment StoreEntitySet="ContadorConsultas">
+          <ScalarProperty Name="IdContadorConsultas" ColumnName="IdContadorConsultas" />
+          <ScalarProperty Name="Conteo" ColumnName="Conteo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContadorRoles">
+      <EntityTypeMapping TypeName="CampoOrgModel.ContadorRole">
+        <MappingFragment StoreEntitySet="ContadorRoles">
+          <ScalarProperty Name="IdContadorRoles" ColumnName="IdContadorRoles" />
+          <ScalarProperty Name="Conteo" ColumnName="Conteo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Geolocalizacions">
+      <EntityTypeMapping TypeName="CampoOrgModel.Geolocalizacion">
+        <MappingFragment StoreEntitySet="Geolocalizacion">
+          <ScalarProperty Name="IdGeolocalizacion" ColumnName="IdGeolocalizacion" />
+          <ScalarProperty Name="Dispositivo" ColumnName="Dispositivo" />
+          <ScalarProperty Name="DicrecionIP" ColumnName="DicrecionIP" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rols">
+      <EntityTypeMapping TypeName="CampoOrgModel.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="IdRoles" ColumnName="IdRoles" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="CampoOrgModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="IdRoles" ColumnName="IdRoles" />
+          <ScalarProperty Name="Correo" ColumnName="Correo" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
