@@ -6,6 +6,7 @@
     </Key>
     <Property Name="IdContadorConsultas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Conteo" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
   </EntityType>
   <EntityType Name="ContadorRoles">
     <Key>

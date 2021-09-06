@@ -16,5 +16,6 @@ namespace CampoORG.API.Models
     {
         public int IdContadorConsultas { get; set; }
         public int Conteo { get; set; }
+        public string Descripcion { get; set; }
     }
 }

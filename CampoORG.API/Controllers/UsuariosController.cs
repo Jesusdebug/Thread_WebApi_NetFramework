@@ -22,19 +22,27 @@ namespace CampoORG.API.Controllers
         public IQueryable<Usuario> GetUsuarios()
         {
             //hilo
-            Thread thread = new Thread(ContadoConultas);
-            thread.Start();
-            thread.Join();
+            Thread tconsultas = new Thread(()=> ContadoConultas(1));
+            tconsultas.Start();
+            tconsultas.Join();
             return db.Usuarios;
         }
 
-        private void ContadoConultas()
+        private void ContadoConultas(int id)
         {
             ContadorConsulta contadorConsulta = new ContadorConsulta();
             int conteo = 1;
-            contadorConsulta.Conteo = conteo;
-            db.ContadorConsultas.Add(contadorConsulta);
+            var query = (from consultas in db.ContadorConsultas where consultas.IdContadorConsultas ==id select consultas).FirstOrDefault();
+            query.Conteo += conteo;
             db.SaveChanges();
+            
+       
+            
+            //string desc = "una consulta";
+            //contadorConsulta.Conteo = conteo;
+            //contadorConsulta.Descripcion = desc;
+            //db.ContadorConsultas.Add(contadorConsulta);
+            //db.SaveChanges();
         }
 
         // GET: api/Usuarios/5
@@ -46,6 +54,9 @@ namespace CampoORG.API.Controllers
             {
                 return NotFound();
             }
+            Thread tconsultas = new Thread(() => ContadoConultas(2));
+            tconsultas.Start();
+            tconsultas.Join();
             Thread thread = new Thread(ReGeolocalizacio);
             thread.Start();
             thread.Join();
@@ -85,6 +96,9 @@ namespace CampoORG.API.Controllers
                     throw;
                 }
             }
+            Thread tconsultas = new Thread(() => ContadoConultas(4));
+            tconsultas.Start();
+            tconsultas.Join();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -97,11 +111,18 @@ namespace CampoORG.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-           
+
             db.Usuarios.Add(usuario);
             db.SaveChanges();
             Thread thread = new Thread(ReGeolocalizacio);
             thread.Start();
+            thread.Join();
+            Thread thread1 = new Thread(ContadorRoles);
+            thread1.Start();
+            Thread tconsultas = new Thread(() => ContadoConultas(6));
+            tconsultas.Start();
+            tconsultas.Join();
+
             return CreatedAtRoute("DefaultApi", new { id = usuario.Id }, usuario);
         }
 
@@ -120,7 +141,7 @@ namespace CampoORG.API.Controllers
             Geolocalizacion geolocalizacion = new Geolocalizacion();
             var hora = DateTime.Now.ToString();
             var dispositivo = Dns.GetHostName();
-            var Ip = Dns.GetHostAddresses(dispositivo).ToString();
+            var Ip = Dns.GetHostByName(dispositivo).AddressList[0].ToString();//IPAddress.Loopback.ToString();//Dns.GetHostAddresses(dispositivo).ToString();
             geolocalizacion.Dispositivo = dispositivo;
             geolocalizacion.DicrecionIP = Ip;
             geolocalizacion.Hora = hora;
@@ -140,6 +161,9 @@ namespace CampoORG.API.Controllers
 
             db.Usuarios.Remove(usuario);
             db.SaveChanges();
+            Thread tconsultas = new Thread(() => ContadoConultas(5));
+            tconsultas.Start();
+            tconsultas.Join();
 
             return Ok(usuario);
         }

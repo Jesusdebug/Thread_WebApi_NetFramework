@@ -4,6 +4,7 @@
     <EntitySetMapping Name="ContadorConsultas">
       <EntityTypeMapping TypeName="CampoOrgModel.ContadorConsulta">
         <MappingFragment StoreEntitySet="ContadorConsultas">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="IdContadorConsultas" ColumnName="IdContadorConsultas" />
           <ScalarProperty Name="Conteo" ColumnName="Conteo" />
         </MappingFragment>
