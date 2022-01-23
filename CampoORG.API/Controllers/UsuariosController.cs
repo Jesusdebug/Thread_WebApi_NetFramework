@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CampoORG.API.Models;
@@ -22,9 +19,9 @@ namespace CampoORG.API.Controllers
         public IQueryable<Usuario> GetUsuarios()
         {
             //hilo
-            Thread tconsultas = new Thread(()=> ContadoConultas(1));
-            tconsultas.Start();
-            tconsultas.Join();
+            Thread thread1 = new Thread(() => ContadoConultas(1));
+            thread1.Start();
+            thread1.Join();
             return db.Usuarios;
         }
 
@@ -32,12 +29,10 @@ namespace CampoORG.API.Controllers
         {
             ContadorConsulta contadorConsulta = new ContadorConsulta();
             int conteo = 1;
-            var query = (from consultas in db.ContadorConsultas where consultas.IdContadorConsultas ==id select consultas).FirstOrDefault();
+            var query = (from consultas in db.ContadorConsultas where consultas.IdContadorConsultas == id select consultas).FirstOrDefault();
             query.Conteo += conteo;
             db.SaveChanges();
-            
-       
-            
+
             //string desc = "una consulta";
             //contadorConsulta.Conteo = conteo;
             //contadorConsulta.Descripcion = desc;
@@ -139,12 +134,11 @@ namespace CampoORG.API.Controllers
         private void ReGeolocalizacio()
         {
             Geolocalizacion geolocalizacion = new Geolocalizacion();
-            var hora = DateTime.Now.ToString();
             var dispositivo = Dns.GetHostName();
-            var Ip = Dns.GetHostByName(dispositivo).AddressList[0].ToString();//IPAddress.Loopback.ToString();//Dns.GetHostAddresses(dispositivo).ToString();
+            //IPAddress.Loopback.ToString();//Dns.GetHostAddresses(dispositivo).ToString();
             geolocalizacion.Dispositivo = dispositivo;
-            geolocalizacion.DicrecionIP = Ip;
-            geolocalizacion.Hora = hora;
+            geolocalizacion.DicrecionIP = Dns.GetHostByName(dispositivo).AddressList[0].ToString(); ;
+            geolocalizacion.Hora = DateTime.Now.ToString();
             db.Geolocalizacions.Add(geolocalizacion);
             db.SaveChanges();
         }
